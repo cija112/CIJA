@@ -1,0 +1,145 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 260px;
+  height: 100vh;
+  background: #07050b;
+  border-right: 1px solid #1a1425;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 100;
+  transition: transform 0.3s ease;
+}
+
+.topContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 16px 0;
+}
+
+.logoContainer {
+  text-align: center;
+  padding: 0 0 24px;
+  border-bottom: 1px solid #1a1425;
+  margin-bottom: 20px;
+}
+
+.logo {
+  height: 52px;
+  width: auto;
+  margin-bottom: 6px;
+  object-fit: contain;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #64748b;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 4px;
+  color: #722eca;
+
+  margin: 2px 0 0;
+  font-weight: 700;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: #94a3b8;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.menuItem:hover {
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.menuItem.active {
+  background: rgba(124, 58, 237, 0.15);
+  color: #c4b5fd;
+  font-weight: 600;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.iconWrapper svg {
+  width: 20px;
+  height: 20px;
+}
+
+.menuLabel {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badge {
+  background: #7c3aed;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.bottomContent {
+  padding: 16px;
+  border-top: 1px solid #1a1425;
+}
+
+.logout {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 10px;
+  color: #f87171;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logout:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}

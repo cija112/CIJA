@@ -1,0 +1,97 @@
+import 'dotenv/config';
+
+import { NestFactory } from '@nestjs/core';
+import { ValidationPipe, Logger } from '@nestjs/common';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import cookieParser from 'cookie-parser';
+
+import { AppModule } from './app.module';
+
+async function bootstrap() {
+  // ============================================================
+  // CRIAÇÃO DA APLICAÇÃO
+  // ============================================================
+
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    bodyParser: true,
+  });
+
+  // ============================================================
+  // CORS
+  // ============================================================
+
+  app.enableCors({
+    origin: [
+      'https://projeto-cija.vercel.app',
+      'http://localhost:5173',
+      'http://localhost:3000',
+    ],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  });
+
+  // ============================================================
+  // COOKIE PARSER
+  // ============================================================
+
+  app.use(cookieParser());
+
+  // ============================================================
+  // VALIDATION PIPE
+  // ============================================================
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+    }),
+  );
+
+  // ============================================================
+  // CONFIGURAÇÃO DO SERVIDOR
+  // ============================================================
+
+  const server = app.getHttpServer();
+
+  // Timeout
+  server.setTimeout(360_000);
+
+  // Mantém conexões abertas por 4 min
+  server.keepAliveTimeout = 360_000;
+
+  // Timeout dos headers
+  server.headersTimeout = 360_000;
+
+  // ============================================================
+  // PORTA
+  // ============================================================
+
+  const port = Number(process.env.PORT || 3001);
+
+  await app.listen(port, '0.0.0.0');
+
+  // ============================================================
+  // LOGS
+  // ============================================================
+
+  Logger.log(`[Backend] Rodando na porta ${port}`, 'Bootstrap');
+
+  Logger.log(`Backend rodando na porta ${port}`, 'Bootstrap');
+
+  Logger.log(`Servidor disponível em 0.0.0.0:${port}`, 'Bootstrap');
+}
+
+// ============================================================
+// INICIALIZAÇÃO
+// ============================================================
+
+bootstrap().catch((error: unknown) => {
+  Logger.error(
+    'Erro fatal ao iniciar o backend',
+    error instanceof Error ? error.stack : String(error),
+    'Bootstrap',
+  );
+
+  process.exit(1);
+});
